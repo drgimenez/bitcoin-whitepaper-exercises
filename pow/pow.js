@@ -55,10 +55,24 @@ function createBlock(data) {
 
 function blockHash(bl) {
 	// TODO
+	while (true) {
+		bl.nonce = Math.trunc(Math.random() * 1E7);
+		let hash = crypto.createHash("sha256").update(
+			`${bl.index};${bl.prevHash};${JSON.stringify(bl.data)};${bl.timestamp};${bl.nonce}`
+		).digest("hex");
+
+		if (hashIsLowEnough(hash)) {
+			return hash;
+		}
+	}
 }
 
 function hashIsLowEnough(hash) {
 	// TODO
+	var neededChars = Math.ceil(difficulty / 4);
+	var threshold = Number(`0b${"".padStart(neededChars * 4,"1111".padStart(4 + difficulty,"0"))}`);
+	var prefix = Number(`0x${hash.substr(0,neededChars)}`);
+	return prefix <= threshold;
 }
 
 function verifyBlock(bl) {
