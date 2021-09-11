@@ -1,3 +1,7 @@
 incentives/keys
 incentives/node_modules
 incentives/package-lock.json
+
+transactions/keys
+transactions/node_modules
+transactions/package-lock.json
