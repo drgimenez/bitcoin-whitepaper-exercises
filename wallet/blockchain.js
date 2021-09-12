@@ -4,6 +4,7 @@ var path = require("path");
 var fs = require("fs");
 var crypto = require("crypto");
 var openpgp = require("openpgp");
+const { Console } = require("console");
 
 var myChain = {
 	blocks: [],
@@ -38,7 +39,7 @@ function createBlock(data) {
 		data,
 		timestamp: Date.now(),
 	};
-
+	
 	bl.hash = blockHash(bl);
 
 	return bl;
